@@ -52,7 +52,19 @@
     <Compile Include="CitasMediasClientes.Designer.cs">
       <DependentUpon>CitasMediasClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="CitasMedicasAdministrador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CitasMedicasAdministrador.Designer.cs">
+      <DependentUpon>CitasMedicasAdministrador.cs</DependentUpon>
+    </Compile>
     <Compile Include="Conexion.cs" />
+    <Compile Include="ModificarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModificarUsuario.Designer.cs">
+      <DependentUpon>ModificarUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +82,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CitasMediasClientes.resx">
       <DependentUpon>CitasMediasClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CitasMedicasAdministrador.resx">
+      <DependentUpon>CitasMedicasAdministrador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModificarUsuario.resx">
+      <DependentUpon>ModificarUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>

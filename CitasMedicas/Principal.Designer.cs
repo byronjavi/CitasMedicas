@@ -47,6 +47,8 @@ namespace CitasMedicas
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(367, 49);
             this.txtUsuario.TabIndex = 3;
+            this.txtUsuario.Tag = "1";
+            this.txtUsuario.KeyDown += new System.Windows.Forms.KeyEventHandler(this.darEnter);
             // 
             // txtPass
             // 
@@ -58,6 +60,8 @@ namespace CitasMedicas
             this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(367, 49);
             this.txtPass.TabIndex = 4;
+            this.txtPass.Tag = "2";
+            this.txtPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.darEnter2);
             // 
             // btnAceptar
             // 
@@ -72,6 +76,7 @@ namespace CitasMedicas
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(201, 61);
             this.btnAceptar.TabIndex = 2;
+            this.btnAceptar.Tag = "3";
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAceptar.UseVisualStyleBackColor = false;
@@ -104,6 +109,7 @@ namespace CitasMedicas
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Principal";
+            this.Shown += new System.EventHandler(this.DarFocus);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

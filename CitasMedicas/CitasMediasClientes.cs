@@ -17,6 +17,7 @@ namespace CitasMedicas
         {
             InitializeComponent();
             configurarFecha();
+            cbxHora.SelectedIndex = 0;
             
         }
 
@@ -51,17 +52,20 @@ namespace CitasMedicas
         /***********************************************/
         private void guardarCita(object sender, EventArgs e)
         {
-            /*string id_user = 0;
+            
             Conexion c = new Conexion();
             c.Id_medico = Convert.ToInt32(cbxMedico.SelectedValue);
-            id_user = 
-            c.Id_usuario = 
-            c.Fcita = dtpfecha.Value.ToString("dd/MM/yyyy");
+            c.Id_usuario = c.consultarIdUsuario(c,txtCedula.Text.Trim());
+            c.Fcita = DateTime.ParseExact(dtpfecha.Value.ToString("dd/MM/yyyy"),"dd/mm/yyyy",null);
             c.Hcita = cbxHora.SelectedItem.ToString();
-            MessageBox.Show(dtpfecha.Value.ToString("dd/MM/yyyy"));*/
-            
-            //Usuarios usuarios = new Usuarios();
-            //usuarios.Show();
+
+            if (c.ingresarCita(c) != 0)
+            {
+                llenarDGV();
+                MessageBox.Show("Se registro la cita correctamente");
+            }
+            else
+                MessageBox.Show("Error al guardar cita");          
         }
 
         /***********************************************/
@@ -74,9 +78,78 @@ namespace CitasMedicas
 
         private void llenarDGV()
         {
-            Conexion c = new Conexion();
-            c.llenarDataGridView(dgvCitasMedicas, 6);
-            
+            try
+            {
+                dgvCitasMedicas.Rows.Clear();
+                Conexion c = new Conexion();
+                c.llenarDataGridView(dgvCitasMedicas, 6);
+            }
+            catch(Exception ex) {MessageBox.Show(ex.Message); return; }
+        }
+
+        private void darFocus(object sender, EventArgs e)
+        {
+            cbxHora.SelectedIndex = 0;
+        }
+
+        private void seleccionarSoloUno(object sender, DataGridViewCellEventArgs e)
+        {
+            // Verificar si la celda clickeada es una celda CheckBox
+            if (e.RowIndex >= 0 && e.ColumnIndex == dgvCitasMedicas.Columns["Eliminar"].Index)
+            {
+                // Desmarcar todos los CheckBox
+                foreach (DataGridViewRow row in dgvCitasMedicas.Rows)
+                {
+                    row.Cells["Eliminar"].Value = false;
+                }
+
+                // Marcar el CheckBox de la fila clickeada
+                dgvCitasMedicas.Rows[e.RowIndex].Cells["Eliminar"].Value = true;
+            }
+        }
+
+        public void recorrerDGV()
+        {
+            foreach (DataGridViewRow row in dgvCitasMedicas.Rows)
+            {
+       
+                    Conexion c = new Conexion();
+                    if (row.Cells["Eliminar"].Value.ToString().Trim().Equals("True"))
+                    {
+                        int resultado = 0;
+                        c.Id_cita = int.Parse(row.Cells["ID"].Value.ToString().Trim());
+                        resultado = c.EliminarCita(c, c.Id_cita);
+                        if (resultado == 1)
+                        {
+
+                            MessageBox.Show("La cita se elimino exitosamente");
+                            dgvCitasMedicas.Rows.Remove(row);
+                        }
+                        else
+                        {
+                            MessageBox.Show("No fue posible eliminar la cita");
+                        }
+                    }
+                
+            }
+        }
+
+        private void eliminarCita(object sender, EventArgs e)
+        {
+            DialogResult d = MessageBox.Show("¿Esta seguro que quiere eliminar la cita?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (d == DialogResult.Yes)
+            {
+                recorrerDGV();
+            }
+        }
+
+        private void modificarCita(object sender, EventArgs e)
+        {
+            DialogResult d = MessageBox.Show("¿Esta seguro que desea modificar la cita?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (d == DialogResult.Yes)
+            {
+                recorrerDGV();
+            }
         }
     }
 }

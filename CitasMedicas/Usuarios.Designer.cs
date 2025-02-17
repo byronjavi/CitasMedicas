@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Usuarios));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -54,31 +52,13 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txtPassword2 = new System.Windows.Forms.TextBox();
-            this.btnIngresarUsuario = new System.Windows.Forms.Button();
             this.cbxSexo = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.btnIngresarUsuario = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(800, 62);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(-3, 554);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(808, 43);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
             // 
             // label1
             // 
@@ -126,7 +106,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(419, 285);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(169, 31);
+            this.label5.Size = new System.Drawing.Size(135, 25);
             this.label5.TabIndex = 6;
             this.label5.Text = "Tipo de Sexo:";
             // 
@@ -196,7 +176,7 @@
             this.txtNombre.Location = new System.Drawing.Point(120, 85);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(250, 30);
-            this.txtNombre.TabIndex = 15;
+            this.txtNombre.TabIndex = 1;
             // 
             // txtApellido
             // 
@@ -204,7 +184,7 @@
             this.txtApellido.Location = new System.Drawing.Point(517, 85);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(250, 30);
-            this.txtApellido.TabIndex = 16;
+            this.txtApellido.TabIndex = 2;
             // 
             // txtEmail
             // 
@@ -212,7 +192,7 @@
             this.txtEmail.Location = new System.Drawing.Point(120, 155);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(250, 30);
-            this.txtEmail.TabIndex = 17;
+            this.txtEmail.TabIndex = 3;
             // 
             // txtDireccion
             // 
@@ -220,7 +200,7 @@
             this.txtDireccion.Location = new System.Drawing.Point(517, 155);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(250, 30);
-            this.txtDireccion.TabIndex = 18;
+            this.txtDireccion.TabIndex = 4;
             // 
             // cbxTipoDocumento
             // 
@@ -230,7 +210,7 @@
             this.cbxTipoDocumento.Location = new System.Drawing.Point(191, 215);
             this.cbxTipoDocumento.Name = "cbxTipoDocumento";
             this.cbxTipoDocumento.Size = new System.Drawing.Size(179, 33);
-            this.cbxTipoDocumento.TabIndex = 19;
+            this.cbxTipoDocumento.TabIndex = 5;
             // 
             // txtNumeroDocumento
             // 
@@ -238,7 +218,7 @@
             this.txtNumeroDocumento.Location = new System.Drawing.Point(570, 220);
             this.txtNumeroDocumento.Name = "txtNumeroDocumento";
             this.txtNumeroDocumento.Size = new System.Drawing.Size(197, 30);
-            this.txtNumeroDocumento.TabIndex = 20;
+            this.txtNumeroDocumento.TabIndex = 6;
             // 
             // txtTelefono
             // 
@@ -246,7 +226,7 @@
             this.txtTelefono.Location = new System.Drawing.Point(120, 280);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(250, 30);
-            this.txtTelefono.TabIndex = 21;
+            this.txtTelefono.TabIndex = 7;
             // 
             // cbxTipoUsuario
             // 
@@ -256,7 +236,7 @@
             this.cbxTipoUsuario.Location = new System.Drawing.Point(183, 348);
             this.cbxTipoUsuario.Name = "cbxTipoUsuario";
             this.cbxTipoUsuario.Size = new System.Drawing.Size(187, 33);
-            this.cbxTipoUsuario.TabIndex = 22;
+            this.cbxTipoUsuario.TabIndex = 9;
             // 
             // txtUsuario
             // 
@@ -264,7 +244,7 @@
             this.txtUsuario.Location = new System.Drawing.Point(517, 348);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(250, 30);
-            this.txtUsuario.TabIndex = 23;
+            this.txtUsuario.TabIndex = 10;
             // 
             // txtPassword
             // 
@@ -272,7 +252,7 @@
             this.txtPassword.Location = new System.Drawing.Point(149, 418);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(221, 30);
-            this.txtPassword.TabIndex = 24;
+            this.txtPassword.TabIndex = 11;
             // 
             // label14
             // 
@@ -290,22 +270,7 @@
             this.txtPassword2.Location = new System.Drawing.Point(592, 416);
             this.txtPassword2.Name = "txtPassword2";
             this.txtPassword2.Size = new System.Drawing.Size(175, 30);
-            this.txtPassword2.TabIndex = 26;
-            // 
-            // btnIngresarUsuario
-            // 
-            this.btnIngresarUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(157)))), ((int)(((byte)(219)))));
-            this.btnIngresarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIngresarUsuario.Image = ((System.Drawing.Image)(resources.GetObject("btnIngresarUsuario.Image")));
-            this.btnIngresarUsuario.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnIngresarUsuario.Location = new System.Drawing.Point(300, 475);
-            this.btnIngresarUsuario.Name = "btnIngresarUsuario";
-            this.btnIngresarUsuario.Size = new System.Drawing.Size(172, 61);
-            this.btnIngresarUsuario.TabIndex = 29;
-            this.btnIngresarUsuario.Text = "Guardar";
-            this.btnIngresarUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnIngresarUsuario.UseVisualStyleBackColor = false;
-            this.btnIngresarUsuario.Click += new System.EventHandler(this.registrarUsuario);
+            this.txtPassword2.TabIndex = 12;
             // 
             // cbxSexo
             // 
@@ -318,8 +283,42 @@
             this.cbxSexo.Location = new System.Drawing.Point(570, 277);
             this.cbxSexo.Name = "cbxSexo";
             this.cbxSexo.Size = new System.Drawing.Size(197, 33);
-            this.cbxSexo.SelectedIndex = 0;
-            this.cbxSexo.TabIndex = 30;
+            this.cbxSexo.TabIndex = 8;
+            // 
+            // btnIngresarUsuario
+            // 
+            this.btnIngresarUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(157)))), ((int)(((byte)(219)))));
+            this.btnIngresarUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIngresarUsuario.Image = ((System.Drawing.Image)(resources.GetObject("btnIngresarUsuario.Image")));
+            this.btnIngresarUsuario.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnIngresarUsuario.Location = new System.Drawing.Point(300, 475);
+            this.btnIngresarUsuario.Name = "btnIngresarUsuario";
+            this.btnIngresarUsuario.Size = new System.Drawing.Size(172, 61);
+            this.btnIngresarUsuario.TabIndex = 13;
+            this.btnIngresarUsuario.Text = "Guardar";
+            this.btnIngresarUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnIngresarUsuario.UseVisualStyleBackColor = false;
+            this.btnIngresarUsuario.Click += new System.EventHandler(this.registrarUsuario);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(0, 554);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(808, 43);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(800, 62);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // Usuarios
             // 
@@ -358,9 +357,9 @@
             this.MaximizeBox = false;
             this.Name = "Usuarios";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Cliente";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Text = "Usuario";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

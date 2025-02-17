@@ -13,8 +13,10 @@ namespace CitasMedicas
     {
         private string nombre, apellido, email, direccion, tipoDocumento, numDocumento, telefono, sexo, tipoUsuario, usuario, password;
         private int id_tipoDocumento, id_tipoUsuario, id_cita, id_medico, id_usuario;
-        private string fcita, hcita, ecita;
-        private static string conn = "Server=DESKTOP-73OL00S\\SQLEXPRESS;Database=citasMedicas;Integrated Security=True;";
+        private string hcita, ecita;
+        private DateTime fcita;
+        private static string conn = "Data Source=SQL1002.site4now.net;Initial Catalog=db_ab2dcd_citasmedicas;User Id=db_ab2dcd_citasmedicas_admin;Password=BBcorp10;";
+        //private static string conn = "Server=DESKTOP-73OL00S\\SQLEXPRESS;Database=citasMedicas;Integrated Security=True;";
 
         public string Nombre { get => nombre; set => nombre = value; }
         public string Apellido { get => apellido; set => apellido = value; }
@@ -30,7 +32,7 @@ namespace CitasMedicas
         public int Id_tipoDocumento { get => id_tipoDocumento; set => id_tipoDocumento = value; }
         public int Id_tipoUsuario { get => id_tipoUsuario; set => id_tipoUsuario = value; }
         public int Id_cita { get => id_cita; set => id_cita = value; }
-        public string Fcita { get => fcita; set => fcita = value; }
+        public DateTime Fcita { get => fcita; set => fcita = value; }
         public string Hcita { get => hcita; set => hcita = value; }
         public string Ecita { get => ecita; set => ecita = value; }
         public int Id_medico { get => id_medico; set => id_medico = value; }
@@ -102,6 +104,7 @@ namespace CitasMedicas
     
         }
 
+        /*************************************************************/
 
         public void llenarEspecialidad(ComboBox cbx)
         {
@@ -179,6 +182,40 @@ namespace CitasMedicas
             return resultado;
         }
 
+
+        /*************************************************************/
+
+        public int modificarUsuario(Conexion c)
+        {
+            int resultado = 0;
+            string cadena = "UPDATE USUARIO SET ID_TIPODOCUMENTO = @id_tipodocumento,ID_TIPOUSUARIO=@id_tipousuario,NOMBRE_USUARIO=@nombre,APELLIDO_USUARIO=@apellido,EMAIL_USUARIO=@email,DIRECCION_USUARIO=@direccion,TELEFONO=@telefono,SEXO=@sexo,USUARIO=@usuario,PASSWORD = @pass WHERE NUMERO_DOCUMENTO = @cedula";
+            //string cadena = "UPDATE USUARIO SET NOMBRE_USUARIO=@nombre,APELLIDO_USUARIO=@apellido WHERE NUMERO_DOCUMENTO = @cedula";
+
+            try
+            {
+                SqlConnection conn = abrirConexion();
+                SqlCommand command = new SqlCommand(cadena, conn);
+                command.Parameters.AddWithValue("@id_tipodocumento", c.Id_tipoDocumento);
+                command.Parameters.AddWithValue("@id_tipousuario", c.Id_tipoUsuario);
+                command.Parameters.AddWithValue("@nombre", c.Nombre);
+                command.Parameters.AddWithValue("@apellido", c.Apellido);
+                command.Parameters.AddWithValue("@email", c.Email);
+                command.Parameters.AddWithValue("@direccion", c.Direccion);
+                command.Parameters.AddWithValue("@telefono", c.Telefono);
+                command.Parameters.AddWithValue("@sexo", c.Sexo);
+                command.Parameters.AddWithValue("@usuario", c.Usuario);
+                command.Parameters.AddWithValue("@pass", c.Password);
+                command.Parameters.AddWithValue("@cedula", c.NDocumento);
+                resultado = command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                resultado = 0;
+            }
+            return resultado;
+        }
+
         /*************************************************************************************/
 
         public int ingresarCita(Conexion c)
@@ -224,6 +261,7 @@ namespace CitasMedicas
                     c.Password = reader.GetString(3);
                     c.TUsuario = reader.GetString(4);
                     c.NDocumento = reader.GetString(5);
+                    c.id_tipoUsuario = reader.GetInt32(6);
                     resultado = 1;
                 }
             }
@@ -236,6 +274,125 @@ namespace CitasMedicas
         }
 
 
+        /**************************************************************/
+
+        public int consultarIdUsuario(Conexion c, string ced)
+        {
+            int resultado = 0;
+            try
+            {
+                SqlConnection conn = abrirConexion();
+                string cadena = "select ID_USUARIO FROM USUARIO WHERE NUMERO_DOCUMENTO = '" + ced+"'";
+                SqlCommand cmd = new SqlCommand(cadena, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    resultado = (reader.GetInt32(0));
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                resultado = 0;
+            }
+            return resultado;
+        }
+
+        /************************************************************/
+
+        public int consultarUsuarioTipo(Conexion c, string tipo, string dato)
+        {
+            int resultado = 0;
+            string cadena = "";
+            try
+            {
+                if (tipo.Equals("Cedula"))
+                    cadena = "select * from USUARIO where NUMERO_DOCUMENTO = '" + dato + "'";
+                else if (tipo.Equals("Nombre"))
+                {
+                    cadena = "select * from USUARIO where NOMBRE_USUARIO = '" + dato + "'";
+                    MessageBox.Show("Estoy dentro de la cadena");
+                }
+                else
+                    MessageBox.Show("No reconocio el nombre");
+                SqlConnection conn = abrirConexion();
+                
+                SqlCommand cmd = new SqlCommand(cadena, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    c.id_usuario = (reader.GetInt32(0));
+                    c.id_tipoDocumento = (reader.GetInt32(1));
+                    c.id_tipoUsuario = (reader.GetInt32(2));
+                    c.nombre = reader.GetString(3);
+                    c.apellido = reader.GetString(4);
+                    c.email = reader.GetString(5);
+                    c.direccion = reader.GetString(6);
+                    c.telefono = reader.GetString(7);
+                    c.usuario = reader.GetString(9);
+                    c.password = reader.GetString(10);
+                    c.numDocumento = reader.GetString(11);
+                    resultado = 1;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                resultado = 0;
+            }
+            return resultado;
+        }
+
+
+        /***********************************************************/
+
+
+        public int consultarCitaPorFechaHora(Conexion c, DateTime fecha, string hora)
+        {
+            int resultado = 0;
+            try
+            {
+                SqlConnection conn = abrirConexion();
+                string cadena = "select ID_CITA from CITA where FECHA_CITA = '"+fecha+"' and HORA_CITA = '"+hora+"'";
+                SqlCommand cmd = new SqlCommand(cadena, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    resultado = (reader.GetInt32(0));
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                resultado = 0;
+            }
+            return resultado;
+        }
+
+        /**********************************************************/
+
+
+        public int EliminarCita(Conexion c, int id)
+        {
+            int resultado = 0;
+            try
+            {
+                SqlConnection conn = abrirConexion();
+                string cadena = "UPDATE CITA SET ESTADO_CITA = 'I' WHERE ID_CITA = '"+id+"'";
+                SqlCommand cmd = new SqlCommand(cadena, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                resultado = 1;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Sale este error: "+e.Message);
+                resultado = 0;
+            }
+            return resultado;
+        }
+
+
+        /**************************************************************/
 
         public int llenarDataGridView(DataGridView dgv,int id)
         {
@@ -244,15 +401,15 @@ namespace CitasMedicas
             {
                 SqlConnection conn = abrirConexion();
                 string cadena = "SELECT U.NUMERO_DOCUMENTO, U.NOMBRE_USUARIO,U.APELLIDO_USUARIO, " +
-                    "E.NOMBRE_ESPECIALIDAD,M.NOMBRE_MEDICO,C.FECHA_CITA,C.HORA_CITA FROM " +
+                    "E.NOMBRE_ESPECIALIDAD,M.NOMBRE_MEDICO,C.FECHA_CITA,C.HORA_CITA, C.ID_CITA FROM " +
                     "USUARIO AS U INNER JOIN CITA AS C ON U.ID_USUARIO = C.ID_USUARIO INNER JOIN " +
                     "MEDICO AS M ON M.ID_MEDICO = C.ID_MEDICO INNER JOIN ESPECIALIDAD AS E " +
-                    "ON E.ID_ESPECIALIDAD = M.ID_ESPECIALIDAD WHERE U.ID_USUARIO = 1";
+                    "ON E.ID_ESPECIALIDAD = M.ID_ESPECIALIDAD WHERE U.ID_USUARIO = 1 and C.ESTADO_CITA='A'";
                 SqlCommand cmd = new SqlCommand(cadena, conn);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    dgv.Rows.Add(reader.GetString(0).Trim(), reader.GetString(1).Trim()+" "+reader.GetString(2).Trim(),reader.GetString(3).Trim(), reader.GetString(4).Trim(), reader["FECHA_CITA"],reader.GetString(6).Trim());
+                    dgv.Rows.Add(reader.GetInt32(7),reader.GetString(0).Trim(), reader.GetString(1).Trim()+" "+reader.GetString(2).Trim(),reader.GetString(3).Trim(), reader.GetString(4).Trim(), reader["FECHA_CITA"],reader.GetString(6).Trim());
                     resultado = 1;
                 }
             }

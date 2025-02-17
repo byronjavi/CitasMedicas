@@ -15,30 +15,58 @@ namespace CitasMedicas
         public Principal()
         {
             InitializeComponent();
+            txtUsuario.Focus();
         }
 
         private void Ingresar(object sender, EventArgs e)
         {
-            
-            
+            if(txtUsuario.Text.Trim().Equals("") || txtPass.Text.Trim().Equals(""))
+            {
+                MessageBox.Show("Debe llenar todos los campos");
+                return;
+            }
             Conexion c = new Conexion();
             c.Usuario = txtUsuario.Text.Trim();
             c.Password = txtPass.Text.Trim();
             if (c.validarIngreso(c) == 1)
             {
-                if (c.TUsuario.Equals("Administrador"))
+                if (c.Id_tipoUsuario == 1)
                 {
-                    CitasMediasClientes nuevo = new CitasMediasClientes(c);
-                    nuevo.Show();
+                    CitasMedicasAdministrador nuevo = new CitasMedicasAdministrador();  
+                    nuevo.ShowDialog();
                 }
                 else
                 {
                     CitasMediasClientes nuevo = new CitasMediasClientes(c);
-                    nuevo.Show();
+                    nuevo.ShowDialog();
+                    //CitasMedicasAdministrador nuevo = new CitasMedicasAdministrador();
+                    //nuevo.ShowDialog();
                 }
             }
             else
                 MessageBox.Show("Error");
+        }
+
+        private void darEnter(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Ingresar(sender, e);
+            }
+        }
+
+        private void darEnter2(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Ingresar(sender, e);
+            }
+        }
+
+        private void DarFocus(object sender, EventArgs e)
+        {
+            txtUsuario.Focus();
+            
         }
     }
 }
