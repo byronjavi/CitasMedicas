@@ -46,8 +46,10 @@ Puedes ejecutar la aplicacion y visualizar su funcionamiento.
 
 ##
 
+# Imagenes del proyecto
 
-# Mi Proyecto
 
-Este es un proyecto increíble que hace muchas cosas. Aquí está una imagen que lo describe:
-![Descripción de la imagen](CitasMedicas/imagenes/login.png)
+| <img src="CitasMedicas/imagenes/login.png" width="200"/> | <img src="CitasMedicas/imagenes/principal.png" width="200"/> |
+| -------------------------------------------- | -------------------------------------------- |
+| <img src="CitasMedicas/imagenes/modificar_user.png" width="200"/> | <img src="CitasMedicas/imagenes/guardar_usuario.png" width="200"/> |
+| <img src="CitasMedicas/imagenes/citas_medicas.png" width="200"/> |  |
