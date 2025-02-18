@@ -45,4 +45,10 @@ Puedes ejecutar la aplicacion y visualizar su funcionamiento.
 
 | <img src="CitasMedicas/imagenes/login.png" width="300"/> | <img src="CitasMedicas/imagenes/principal.png" width="300"/> | <img src="CitasMedicas/imagenes/modificar_user.png" width="300"/> |
 | -------------------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------- |
-| <img src="CitasMedicas/imagenes/guardar_usuario.png" width="300"/> | <img src="CitasMedicas/imagenes/citas_medicas.png" width="300"/> | --------------------------------------------------- |
+| <img src="CitasMedicas/imagenes/guardar_usuario.png" width="300"/> | <img src="CitasMedicas/imagenes/citas_medicas.png" width="300"/>|
+ 
+## Descargar el ejecutable
+
+Haz clic en el siguiente enlace para descargar el archivo ejecutable:
+
+[Descargar ejecutable](https://github.com/byronjavi/CitasMedicas/CitasMedicas.exe)
