@@ -51,4 +51,4 @@ Puedes ejecutar la aplicacion y visualizar su funcionamiento.
 
 Haz clic en el siguiente enlace para descargar el archivo ejecutable:
 
-[Descargar ejecutable](https://github.com/byronjavi/CitasMedicas/raw/main/CitasMedicas/imagenes/CitasMedicas.exe)
+[Descargar ejecutable](https://github.com/byronjavi/CitasMedicas/raw/master/CitasMedicas/imagenes/CitasMedicas.exe)
