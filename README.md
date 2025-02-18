@@ -28,13 +28,7 @@ Para instalar este proyecto en tu máquina local, sigue estos pasos:
     cd tu-repositorio
     ```
 
-3. Instala las dependencias (si es necesario):
-
-    ```bash
-    npm install
-    ```
-
-4. Inicia la aplicación:
+3. Inicia la aplicación:
 
     ```bash
     npm start
@@ -49,7 +43,6 @@ Puedes ejecutar la aplicacion y visualizar su funcionamiento.
 # Imagenes del proyecto
 
 
-| <img src="CitasMedicas/imagenes/login.png" width="200"/> | <img src="CitasMedicas/imagenes/principal.png" width="200"/> |
-| -------------------------------------------- | -------------------------------------------- |
-| <img src="CitasMedicas/imagenes/modificar_user.png" width="200"/> | <img src="CitasMedicas/imagenes/guardar_usuario.png" width="200"/> |
-| <img src="CitasMedicas/imagenes/citas_medicas.png" width="200"/> |  |
+| <img src="CitasMedicas/imagenes/login.png" width="300"/> | <img src="CitasMedicas/imagenes/principal.png" width="300"/> | <img src="CitasMedicas/imagenes/modificar_user.png" width="300"/> |
+| -------------------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------- |
+| <img src="CitasMedicas/imagenes/guardar_usuario.png" width="300"/> | <img src="CitasMedicas/imagenes/citas_medicas.png" width="300"/> | --------------------------------------------------- |
