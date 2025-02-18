@@ -25,7 +25,7 @@ namespace CitasMedicas
 
         private void verCitas_Click(object sender, EventArgs e)
         {
-            CitasMediasClientes citas = new CitasMediasClientes();
+            CitasAdministrador citas = new CitasAdministrador();
             citas.ShowDialog();
         }
 

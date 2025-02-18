@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>cita_medica1.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CitasAdministrador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CitasAdministrador.Designer.cs">
+      <DependentUpon>CitasAdministrador.cs</DependentUpon>
+    </Compile>
     <Compile Include="CitasMediasClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +89,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CitasAdministrador.resx">
+      <DependentUpon>CitasAdministrador.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CitasMediasClientes.resx">
       <DependentUpon>CitasMediasClientes.cs</DependentUpon>
     </EmbeddedResource>
@@ -150,6 +162,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\imagen\acep128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="cita_medica.ico" />
+    <Content Include="cita_medica1.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

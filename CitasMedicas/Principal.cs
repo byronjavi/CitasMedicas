@@ -22,7 +22,7 @@ namespace CitasMedicas
         {
             if(txtUsuario.Text.Trim().Equals("") || txtPass.Text.Trim().Equals(""))
             {
-                MessageBox.Show("Debe llenar todos los campos");
+                MessageBox.Show("Tiene que llenar todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             Conexion c = new Conexion();
@@ -30,17 +30,16 @@ namespace CitasMedicas
             c.Password = txtPass.Text.Trim();
             if (c.validarIngreso(c) == 1)
             {
+                
                 if (c.Id_tipoUsuario == 1)
                 {
                     CitasMedicasAdministrador nuevo = new CitasMedicasAdministrador();  
                     nuevo.ShowDialog();
                 }
-                else
+                else if(c.Id_tipoUsuario == 2)
                 {
                     CitasMediasClientes nuevo = new CitasMediasClientes(c);
                     nuevo.ShowDialog();
-                    //CitasMedicasAdministrador nuevo = new CitasMedicasAdministrador();
-                    //nuevo.ShowDialog();
                 }
             }
             else

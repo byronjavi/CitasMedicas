@@ -52,7 +52,6 @@ namespace CitasMedicas
         /***********************************************/
         private void guardarCita(object sender, EventArgs e)
         {
-            
             Conexion c = new Conexion();
             c.Id_medico = Convert.ToInt32(cbxMedico.SelectedValue);
             c.Id_usuario = c.consultarIdUsuario(c,txtCedula.Text.Trim());
@@ -62,13 +61,14 @@ namespace CitasMedicas
             if (c.ingresarCita(c) != 0)
             {
                 llenarDGV();
-                MessageBox.Show("Se registro la cita correctamente");
+                MessageBox.Show("La cita fua guardada exitosamente.", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-                MessageBox.Show("Error al guardar cita");          
+                MessageBox.Show("Error al guardar la cita", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        /***********************************************/
+        /***********************************************************/
+
         private void llenarComboMedico(object sender, EventArgs e)
         {
             Conexion c = new Conexion();
@@ -84,8 +84,14 @@ namespace CitasMedicas
                 Conexion c = new Conexion();
                 c.llenarDataGridView(dgvCitasMedicas, 6);
             }
-            catch(Exception ex) {MessageBox.Show(ex.Message); return; }
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; 
+            }
         }
+
+        /*******************************************************************/
 
         private void darFocus(object sender, EventArgs e)
         {
@@ -108,6 +114,7 @@ namespace CitasMedicas
             }
         }
 
+        /********************************************************************/
         public void recorrerDGV()
         {
             foreach (DataGridViewRow row in dgvCitasMedicas.Rows)
@@ -122,13 +129,13 @@ namespace CitasMedicas
                         if (resultado == 1)
                         {
 
-                            MessageBox.Show("La cita se elimino exitosamente");
-                            dgvCitasMedicas.Rows.Remove(row);
+                        MessageBox.Show("La cita se eliminó exitosamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        dgvCitasMedicas.Rows.Remove(row);
                         }
                         else
                         {
-                            MessageBox.Show("No fue posible eliminar la cita");
-                        }
+                        MessageBox.Show("No fue posible eliminar la cita", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                     }
                 
             }

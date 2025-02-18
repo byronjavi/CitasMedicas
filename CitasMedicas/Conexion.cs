@@ -66,7 +66,7 @@ namespace CitasMedicas
             }
             catch(Exception e)
             {
-                MessageBox.Show("Error al conectar a la base de datos");
+                MessageBox.Show("Error al conectar con la Base de Datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -99,7 +99,7 @@ namespace CitasMedicas
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
     
         }
@@ -123,7 +123,7 @@ namespace CitasMedicas
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -146,7 +146,7 @@ namespace CitasMedicas
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -176,7 +176,7 @@ namespace CitasMedicas
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 resultado = 0;
             }
             return resultado;
@@ -210,7 +210,7 @@ namespace CitasMedicas
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 resultado = 0;
             }
             return resultado;
@@ -237,7 +237,7 @@ namespace CitasMedicas
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 resultado = 0;
             }
             return resultado;
@@ -250,7 +250,7 @@ namespace CitasMedicas
             try
             {
                 SqlConnection conn = abrirConexion();
-                string cadena = "select U.NOMBRE_USUARIO,U.APELLIDO_USUARIO,U.USUARIO,U.PASSWORD,T.NOMBRETIPOUSUARIO,U.NUMERO_DOCUMENTO, U.ID_USUARIO from USUARIO AS U INNER JOIN TIPOUSUARIO AS T ON U.ID_TIPOUSUARIO = t.ID_TIPOUSUARIO where U.USUARIO = '" + c.Usuario + "' and U.PASSWORD = '" + c.Password + "'";
+                string cadena = "select U.NOMBRE_USUARIO,U.APELLIDO_USUARIO,U.USUARIO,U.PASSWORD,T.NOMBRETIPOUSUARIO,U.NUMERO_DOCUMENTO, T.ID_TIPOUSUARIO from USUARIO AS U INNER JOIN TIPOUSUARIO AS T ON U.ID_TIPOUSUARIO = t.ID_TIPOUSUARIO where U.USUARIO = '" + c.Usuario + "' and U.PASSWORD = '" + c.Password + "'";
                 SqlCommand cmd = new SqlCommand(cadena, conn);
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -267,7 +267,7 @@ namespace CitasMedicas
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 resultado = 0;
             }
             return resultado;
@@ -292,7 +292,7 @@ namespace CitasMedicas
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 resultado = 0;
             }
             return resultado;
@@ -311,10 +311,9 @@ namespace CitasMedicas
                 else if (tipo.Equals("Nombre"))
                 {
                     cadena = "select * from USUARIO where NOMBRE_USUARIO = '" + dato + "'";
-                    MessageBox.Show("Estoy dentro de la cadena");
                 }
                 else
-                    MessageBox.Show("No reconocio el nombre");
+                    MessageBox.Show("No se encontraron datos asociados a la consulta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SqlConnection conn = abrirConexion();
                 
                 SqlCommand cmd = new SqlCommand(cadena, conn);
@@ -337,7 +336,7 @@ namespace CitasMedicas
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 resultado = 0;
             }
             return resultado;
@@ -363,7 +362,7 @@ namespace CitasMedicas
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 resultado = 0;
             }
             return resultado;
@@ -385,7 +384,7 @@ namespace CitasMedicas
             }
             catch (Exception e)
             {
-                MessageBox.Show("Sale este error: "+e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 resultado = 0;
             }
             return resultado;
@@ -396,15 +395,31 @@ namespace CitasMedicas
 
         public int llenarDataGridView(DataGridView dgv,int id)
         {
+            string cadena = "";
+
+            if (id == -1)
+            {
+                    cadena = "SELECT U.NUMERO_DOCUMENTO, U.NOMBRE_USUARIO,U.APELLIDO_USUARIO, " +
+                    "E.NOMBRE_ESPECIALIDAD,M.NOMBRE_MEDICO,C.FECHA_CITA,C.HORA_CITA, C.ID_CITA FROM " +
+                    "USUARIO AS U INNER JOIN CITA AS C ON U.ID_USUARIO = C.ID_USUARIO INNER JOIN " +
+                    "MEDICO AS M ON M.ID_MEDICO = C.ID_MEDICO INNER JOIN ESPECIALIDAD AS E " +
+                    "ON E.ID_ESPECIALIDAD = M.ID_ESPECIALIDAD WHERE C.ESTADO_CITA='A'";
+            }
+            else 
+            {
+                cadena = "SELECT U.NUMERO_DOCUMENTO, U.NOMBRE_USUARIO,U.APELLIDO_USUARIO, " +
+                "E.NOMBRE_ESPECIALIDAD,M.NOMBRE_MEDICO,C.FECHA_CITA,C.HORA_CITA, C.ID_CITA FROM " +
+                "USUARIO AS U INNER JOIN CITA AS C ON U.ID_USUARIO = C.ID_USUARIO INNER JOIN " +
+                "MEDICO AS M ON M.ID_MEDICO = C.ID_MEDICO INNER JOIN ESPECIALIDAD AS E " +
+                "ON E.ID_ESPECIALIDAD = M.ID_ESPECIALIDAD WHERE U.ID_USUARIO = '" + id + "' and C.ESTADO_CITA='A'";
+
+            }
+
             int resultado = 0;
             try
             {
                 SqlConnection conn = abrirConexion();
-                string cadena = "SELECT U.NUMERO_DOCUMENTO, U.NOMBRE_USUARIO,U.APELLIDO_USUARIO, " +
-                    "E.NOMBRE_ESPECIALIDAD,M.NOMBRE_MEDICO,C.FECHA_CITA,C.HORA_CITA, C.ID_CITA FROM " +
-                    "USUARIO AS U INNER JOIN CITA AS C ON U.ID_USUARIO = C.ID_USUARIO INNER JOIN " +
-                    "MEDICO AS M ON M.ID_MEDICO = C.ID_MEDICO INNER JOIN ESPECIALIDAD AS E " +
-                    "ON E.ID_ESPECIALIDAD = M.ID_ESPECIALIDAD WHERE U.ID_USUARIO = 1 and C.ESTADO_CITA='A'";
+                
                 SqlCommand cmd = new SqlCommand(cadena, conn);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -415,7 +430,7 @@ namespace CitasMedicas
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 resultado = 0;
             }
             return resultado;
