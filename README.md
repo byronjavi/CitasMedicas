@@ -12,6 +12,7 @@ Este proyecto es una aplicación de escritorio que permite gestionar tareas de m
 - **Persistencia de datos** usando bases de datos SQLServer.
 - **Soporte para múltiples usuarios**.
 
+
 ## Instalación
 
 Para instalar este proyecto en tu máquina local, sigue estos pasos:
@@ -20,23 +21,13 @@ Para instalar este proyecto en tu máquina local, sigue estos pasos:
 
     ```bash
     git clone https://github.com/byronjavi/CitasMedicas.git
-    ```
-
-2. Accede al directorio del proyecto:
-
-    ```bash
-    cd tu-repositorio
-    ```
-
-3. Inicia la aplicación:
-
-    ```bash
-    npm start
-    ```
+    
 
 ## Uso
 
 Puedes ejecutar la aplicacion y visualizar su funcionamiento.
+- **El usuario es: bbustos y el password: BBcorp10** 
+- **La Base de datos esta alojada en un servidor gratuito**
 
 ##
 
@@ -51,4 +42,4 @@ Puedes ejecutar la aplicacion y visualizar su funcionamiento.
 
 Haz clic en el siguiente enlace para descargar el archivo ejecutable:
 
-[Descargar ejecutable](https://github.com/byronjavi/CitasMedicas/raw/master/CitasMedicas/imagenes/CitasMedicas.exe)
+[CitasMedicas.exe](https://github.com/byronjavi/CitasMedicas/raw/master/CitasMedicas/imagenes/CitasMedicas.exe)
