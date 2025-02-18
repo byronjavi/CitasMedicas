@@ -1,6 +1,6 @@
 # Citas Medicas
 
-Este es un proyecto enfocado al registro de cCitas Medicas. En este repositorio, encontrarás todos los archivos necesarios para usar y contribuir a este proyecto.
+Este es un proyecto enfocado al registro de Citas Medicas. En este repositorio, encontrarás todos los archivos necesarios para usar y contribuir a este proyecto.
 
 ## Descripción
 
