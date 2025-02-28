@@ -13,6 +13,7 @@ namespace CitasMedicas
 {
     public partial class CitasMediasClientes : Form
     {
+        int idUsuario = 0;
         public CitasMediasClientes()
         {
             InitializeComponent();
@@ -28,10 +29,11 @@ namespace CitasMedicas
             configurarFecha();
             c.llenarEspecialidad(cbxEspecialidad);
             c.llenarMedico(cbxMedico, 1);
-            c.llenarDataGridView(dgvCitasMedicas, 1);
+            c.llenarDataGridView(dgvCitasMedicas, c.Id_usuario);
             lblNombre.Text = "Bienvenido " + c.Nombre.Trim() + " " + c.Apellido.Trim();
             txtCedula.Text = c.NDocumento.Trim();
             txtNombre.Text = c.Nombre.Trim();
+            idUsuario = c.Id_usuario;
         }
 
 
@@ -82,7 +84,7 @@ namespace CitasMedicas
             {
                 dgvCitasMedicas.Rows.Clear();
                 Conexion c = new Conexion();
-                c.llenarDataGridView(dgvCitasMedicas, 6);
+                c.llenarDataGridView(dgvCitasMedicas, idUsuario);
             }
             catch(Exception ex) 
             {

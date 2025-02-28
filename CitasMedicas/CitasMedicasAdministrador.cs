@@ -34,5 +34,17 @@ namespace CitasMedicas
             ModificarUsuario nuevo = new ModificarUsuario();
             nuevo.ShowDialog();
         }
+
+        private void crearEspecialidad(object sender, EventArgs e)
+        {
+            Especialidad nuevo = new Especialidad();
+            nuevo.ShowDialog();
+        }
+
+        private void ingresarDoctor(object sender, EventArgs e)
+        {
+            Doctor d = new Doctor();
+            d.ShowDialog();
+        }
     }
 }

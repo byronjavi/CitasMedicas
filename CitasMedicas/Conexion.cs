@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace CitasMedicas
 {
-    public class Conexion
+    public class Conexion: CitasMedicas
     {
         private string nombre, apellido, email, direccion, tipoDocumento, numDocumento, telefono, sexo, tipoUsuario, usuario, password;
         private int id_tipoDocumento, id_tipoUsuario, id_cita, id_medico, id_usuario;
@@ -55,7 +56,8 @@ namespace CitasMedicas
             this.id_tipoUsuario = 0;
         }
         
-        /*******************************************/
+        /******************************************************************/
+        /*Este método nos permite conectarnos a la DB llamando al método Open()*/
         private static SqlConnection abrirConexion()
         {
             try
@@ -71,7 +73,8 @@ namespace CitasMedicas
             }
         }
 
-        /*********************************************/
+        /*********************************************************************/
+        /*Este metodo lo utilizo para llenar el ComboBox TipoUsuario*/
 
         public void llenarTipo(ComboBox cbx, string tipo)
         {
@@ -104,7 +107,8 @@ namespace CitasMedicas
     
         }
 
-        /*************************************************************/
+        /*******************************************************************/
+        /*Este método lo utilizo para llenar el combo box especialidad en citas medicas*/
 
         public void llenarEspecialidad(ComboBox cbx)
         {
@@ -128,7 +132,8 @@ namespace CitasMedicas
 
         }
 
-
+        /*******************************************************************/
+        /*Este método lo utilizo para llenar el comboBox Medico desde la DB*/
         public void llenarMedico(ComboBox cbx, int id)
         {
             try
@@ -151,6 +156,8 @@ namespace CitasMedicas
 
         }
 
+        /********************************************************************/
+        /*Este método lo utilizo para registrar (guardar) los usuarios en mi DB*/
         public int ingresarUsuario(Conexion c)
         {
             int resultado = 0;
@@ -183,7 +190,8 @@ namespace CitasMedicas
         }
 
 
-        /*************************************************************/
+        /********************************************************************/
+        /*Este método lo utilizo para modificar los usuarios ya creados en la DB*/
 
         public int modificarUsuario(Conexion c)
         {
@@ -216,7 +224,8 @@ namespace CitasMedicas
             return resultado;
         }
 
-        /*************************************************************************************/
+        /**********************************************************************/
+        /*Este método lo utilizo para registrar las citas en mi DB*/
 
         public int ingresarCita(Conexion c)
         {
@@ -243,14 +252,15 @@ namespace CitasMedicas
             return resultado;
         }
 
-        /***********************************************************************************/
+        /**********************************************************************/
+        /*Este método lo utilizo para verificar si el Usuario esta registrado en DB*/
         public int validarIngreso(Conexion c)
         {
             int resultado = 0;
             try
             {
                 SqlConnection conn = abrirConexion();
-                string cadena = "select U.NOMBRE_USUARIO,U.APELLIDO_USUARIO,U.USUARIO,U.PASSWORD,T.NOMBRETIPOUSUARIO,U.NUMERO_DOCUMENTO, T.ID_TIPOUSUARIO from USUARIO AS U INNER JOIN TIPOUSUARIO AS T ON U.ID_TIPOUSUARIO = t.ID_TIPOUSUARIO where U.USUARIO = '" + c.Usuario + "' and U.PASSWORD = '" + c.Password + "'";
+                string cadena = "select U.NOMBRE_USUARIO,U.APELLIDO_USUARIO,U.USUARIO,U.PASSWORD,T.NOMBRETIPOUSUARIO,U.NUMERO_DOCUMENTO, T.ID_TIPOUSUARIO, U.ID_USUARIO from USUARIO AS U INNER JOIN TIPOUSUARIO AS T ON U.ID_TIPOUSUARIO = t.ID_TIPOUSUARIO where U.USUARIO = '" + c.Usuario + "' and U.PASSWORD = '" + c.Password + "'";
                 SqlCommand cmd = new SqlCommand(cadena, conn);
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -262,6 +272,7 @@ namespace CitasMedicas
                     c.TUsuario = reader.GetString(4);
                     c.NDocumento = reader.GetString(5);
                     c.id_tipoUsuario = reader.GetInt32(6);
+                    c.Id_usuario = reader.GetInt32(7);
                     resultado = 1;
                 }
             }
@@ -274,7 +285,8 @@ namespace CitasMedicas
         }
 
 
-        /**************************************************************/
+        /*************************************************************************/
+        /*Este m´wtodo lo utilizo para consultar un usuario en la DB*/
 
         public int consultarIdUsuario(Conexion c, string ced)
         {
@@ -298,7 +310,8 @@ namespace CitasMedicas
             return resultado;
         }
 
-        /************************************************************/
+        /**************************************************************************/
+        /*Este método lo utilizo para consultar el tipo de usuario en DB */
 
         public int consultarUsuarioTipo(Conexion c, string tipo, string dato)
         {
@@ -343,7 +356,8 @@ namespace CitasMedicas
         }
 
 
-        /***********************************************************/
+        /**************************************************************************/
+        /*Este método lo utilizo para consultar las citad por fecha y hora*/
 
 
         public int consultarCitaPorFechaHora(Conexion c, DateTime fecha, string hora)
@@ -368,7 +382,8 @@ namespace CitasMedicas
             return resultado;
         }
 
-        /**********************************************************/
+        /***************************************************************************/
+        /*Este metodo me permite cambiar el estado de la cita, "A" activo o "E" eliminado*/
 
 
         public int EliminarCita(Conexion c, int id)
@@ -391,7 +406,8 @@ namespace CitasMedicas
         }
 
 
-        /**************************************************************/
+        /***************************************************************************/
+        /*Este metodo lo utilizo para llenar el DGV en todas las ventanas*/
 
         public int llenarDataGridView(DataGridView dgv,int id)
         {
@@ -436,6 +452,55 @@ namespace CitasMedicas
             return resultado;
         }
 
+        /****************************************************************/
+        /*Este metodo me permite guardar una nueva especialidad*/
 
+        public int ingresarEspecialidad(Conexion c, string especialidad)
+        {
+            int resultado = 0;
+            string cadena = "INSERT INTO ESPECIALIDAD (NOMBRE_ESPECIALIDAD,ESTADO_ESPECIALIDAD) VALUES ('"+ especialidad + "','A')";
+
+            try
+            {
+                SqlConnection conn = abrirConexion();
+                SqlCommand command = new SqlCommand(cadena, conn);
+                command.Parameters.AddWithValue("@NOMBRE_ESPECIALIDAD", especialidad);
+                resultado = command.ExecuteNonQuery();
+                
+                MessageBox.Show("La especialidad se guardó exitosamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                resultado = 0;
+            }
+            return resultado;
+        }
+
+        /****************************************************************/
+        /*Este metodo me permite guardar un nuevo médico*/
+
+        public int ingresarDoctor(Conexion c, string doctor, int id_especialidad)
+        {
+            int resultado = 0;
+            string cadena = "INSERT INTO MEDICO (ID_ESPECIALIDAD,NOMBRE_MEDICO,ESTADO_MEDICO) VALUES ("+id_especialidad+",'"+doctor+"','A')";
+
+            try
+            {
+                SqlConnection conn = abrirConexion();
+                SqlCommand command = new SqlCommand(cadena, conn);
+                command.Parameters.AddWithValue("@ID_ESPECIALIDAD", id_especialidad);
+                command.Parameters.AddWithValue("@NOMBRE_MEDICO", doctor);
+                resultado = command.ExecuteNonQuery();
+
+                MessageBox.Show("El doctor se guardó exitosamente", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                resultado = 0;
+            }
+            return resultado;
+        }
     }
 }
